@@ -1,24 +1,20 @@
--- Maak verbinding met de database
 USE ShopDB;
 
--- Verwijder de stored procedure als deze al bestaat om fouten te voorkomen
 DROP PROCEDURE IF EXISTS get_warehouse_product_inventory;
 
--- Wijzig de delimiter om de procedure correct te kunnen definiëren
 DELIMITER //
 
 CREATE PROCEDURE get_warehouse_product_inventory(IN warehouse_id INT)
 BEGIN
-    SELECT
+    SELECT 
         p.Name AS Product_Name,
         pi.WarehouseAmount AS Amount
-    FROM
+    FROM 
         ProductInventory pi
-    JOIN
+    JOIN 
         Products p ON pi.ProductID = p.ID
-    WHERE
+    WHERE 
         pi.WarehouseID = warehouse_id;
 END //
 
--- Zet de delimiter weer terug naar de standaard puntkomma
 DELIMITER ;
